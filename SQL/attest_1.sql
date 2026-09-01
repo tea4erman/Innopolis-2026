@@ -23,32 +23,36 @@ WITH overdue_rentals AS (
 	LEFT JOIN category
 	ON film_category.category_id = category.category_id
 	WHERE return_date IS NOT NULL
-), cust_agg AS (
-	SELECT 
-		customer_id,
-		COUNT(rental_id) AS cnt_rental,
-		AVG(is_overdue) AS overdue_pct
-	FROM overdue_rentals
-	GROUP BY customer_id
-	ORDER BY overdue_pct ASC
-), film_agg AS (
-	SELECT 
-		film_id,
-		COUNT(rental_id) AS cnt_rental,
-		AVG(is_overdue) AS overdue_pct
-	FROM overdue_rentals
-	GROUP BY film_id
-	ORDER BY overdue_pct DESC
 )
-SELECT 
-	film_category,
-	COUNT(rental_id) AS cnt_rental,
-	AVG(is_overdue) AS overdue_pct
-FROM overdue_rentals
-GROUP BY film_category
-ORDER BY overdue_pct DESC
-;
-
 SELECT *
-FROM category
-LIMIT 10
+FROM overdue_rentals
+
+-- , cust_agg AS (
+-- 	SELECT 
+-- 		customer_id,
+-- 		COUNT(rental_id) AS cnt_rental,
+-- 		AVG(is_overdue) AS overdue_pct
+-- 	FROM overdue_rentals
+-- 	GROUP BY customer_id
+-- 	ORDER BY overdue_pct ASC
+-- ), film_agg AS (
+-- 	SELECT 
+-- 		film_id,
+-- 		COUNT(rental_id) AS cnt_rental,
+-- 		AVG(is_overdue) AS overdue_pct
+-- 	FROM overdue_rentals
+-- 	GROUP BY film_id
+-- 	ORDER BY overdue_pct DESC
+-- )
+-- SELECT 
+-- 	film_category,
+-- 	COUNT(rental_id) AS cnt_rental,
+-- 	AVG(is_overdue) AS overdue_pct
+-- FROM overdue_rentals
+-- GROUP BY film_category
+-- ORDER BY overdue_pct DESC
+-- ;
+
+-- SELECT *
+-- FROM category
+-- LIMIT 10
