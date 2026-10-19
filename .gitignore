@@ -4,3 +4,5 @@
 /Python/.ipynb_checkpoints
 .env
 /Python/catboost_info
+Python/distillation_data.jsonl
+/Python/finetuning
